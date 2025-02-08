@@ -1,5 +1,6 @@
 import Image from "next/image";
 import TodoApp from "./components/TodoApp";
+import TodoList from "./components/TodoList";
 
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
         <section>
 
 <TodoApp></TodoApp>
+<TodoList></TodoList>
         </section>
     </div>
   );
