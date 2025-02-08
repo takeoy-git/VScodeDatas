@@ -1,8 +1,7 @@
 import React from "react";
 
-export default function TodoApp=()=>{
-
-    return(
-        <h1>aa</h1>
-    )
-}
+const TodoApp: React.FC = () => {
+    return <h1>aa</h1>;
+  };
+  
+  export default TodoApp;
