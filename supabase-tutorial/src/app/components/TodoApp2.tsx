@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAllTodos } from "../../../supabase/supabaseFunc";
+
 
 const TodoApp: React.FC = () => {
+    const [todos,setTodos]=useState([])
+    useEffect( ()=>{
+        const todos=getAllTodos()
+
+
+    });
+
     return (<section>
         <h3 className="text-2xl ">Supabese TodoApply</h3>
         <form>
