@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import { getAllTodos } from "../../../supabase/supabaseFunc";
+import { getAllTodos } from "../../lib/supabase/supabaseFunc";
 import TodoList from "./TodoList";
 
 type Todo = {
