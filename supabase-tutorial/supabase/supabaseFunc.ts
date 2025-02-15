@@ -5,10 +5,22 @@ type Todo={
     title:string
     }
 
-export const getAllTodos=async():Promise<Todo[]|null>=>{
-   try{ const todos=await supabase.from("todo").select("*")
-    return todos.data;
-}catch (error){
-    console.error(error);
-    return null;
-}}
+
+
+
+    export async function getAllTodos(): Promise<Todo[]> {
+        const { data, error } = await supabase.from("todos").select("*");
+    
+        if (error) {
+            console.error("Error fetching todos:", error);
+            return []; // エラー時は空配列を返す
+        }
+    
+        if (!data) {
+            console.warn("No data received from Supabase");
+            return []; // データが `null` または `undefined` の場合も空配列
+        }
+    
+        return data;
+    }
+    
