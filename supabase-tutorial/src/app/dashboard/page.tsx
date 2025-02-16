@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { supabase } from "../../../lib/supabase/supabase";
-import { useAuth } from "../../../lib/supabase/useAuth";
+import { supabase } from "../../supabase/supabase";
+import { useAuth } from "../../supabase/useAuth";
 
 export default function Dashboard() {
     const { user } = useAuth();

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react"; 
 import { useRouter } from "next/navigation";  
-import { useAuth } from "../../lib/supabase/useAuth";
+import { useAuth } from "../supabase/useAuth";
 
 export default function HomePage() {
   const { user, loading } = useAuth();
