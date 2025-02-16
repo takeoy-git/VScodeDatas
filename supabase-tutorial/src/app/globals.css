@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #c81322;
   --foreground: #171717;
 }
 
@@ -17,8 +17,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  background-color: "#C81322"; /* 濃い赤 */
-  background-image: url('/backpattern.png'); /* 画像のパス */
+  background-image: url('/backpattern.png'); /*画像のパス
   background-size: cover; /* 背景画像を画面全体に合わせる */
   background-position: center center; /* 画像を中央に配置 */
   background-repeat: no-repeat; /* 画像が繰り返さないようにする */
