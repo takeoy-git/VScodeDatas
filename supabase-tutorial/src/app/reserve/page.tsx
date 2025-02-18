@@ -3,6 +3,7 @@
 import { supabase } from "@/supabase/supabase";
 import { useEffect, useState } from "react";
 
+
 type Seat = {
   seat_number: number;
   reservation_code: string | null;
@@ -23,13 +24,17 @@ export default function ReservationPage() {
   const [isNameInputVisible, setIsNameInputVisible] = useState<boolean>(false); // 名前入力フォームを表示するフラグ
   const [isCancelMode, setIsCancelMode] = useState<boolean>(false); // キャンセルモード
   const [isCancelSuccessModalVisible, setIsCancelSuccessModalVisible] = useState<boolean>(false); // キャンセル成功モーダル表示
+  const [todayDate, setTodayDate] = useState("");
 
   // 今日の日付を "YYYY年MM月DD日" の形式で表示
-  const todayDate = new Date().toLocaleDateString("ja-JP", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  useEffect(() => {
+    setTodayDate(new Date().toLocaleDateString("ja-JP",{
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }));
+  }, []);
+ 
 
   useEffect(() => {
     const fetchSeats = async () => {
@@ -155,10 +160,29 @@ export default function ReservationPage() {
       const { seatNumber, timeSlot, reservationCode } = selectedReservation;
       const today = new Date().toISOString().split("T")[0].replace(/-/g, "");
 
+      console.log("🔍 削除リクエスト:", {
+        reservationCode,
+        visitorName,
+        seatNumber,
+        timeSlot,
+        today,
+      });
+
       // visitor_name が一致する場合にのみ予約をキャンセル
       const reservedSeat = seats.find(
         (seat) => seat.seat_number === seatNumber && seat.time_slot === timeSlot
       );
+
+      const {data } = await supabase
+      .from("reservations")
+      .delete()
+      .eq("reservation_code", reservationCode)
+      .eq("visitor_name", visitorName)
+      .eq("seat_number", seatNumber)
+      .eq("time_slot", timeSlot)
+      .eq("date", today)
+      .select("*"); // これを追加
+
 
       if (reservedSeat?.visitor_name === visitorName) {
         const { error } = await supabase
@@ -171,8 +195,10 @@ export default function ReservationPage() {
           .eq("date", today);
 
         if (error) {
+          console.error("❌ 削除エラー:", error);
           alert("キャンセルに失敗しました");
         } else {
+          console.log("✅ 削除成功:", data);
           // キャンセルが成功した場合、座席の状態を未予約に変更
           setSeats(seats.filter((seat) => seat.reservation_code !== reservationCode));
           setIsCancelSuccessModalVisible(true); // キャンセル成功モーダルを表示

@@ -26,18 +26,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-        <head>
+      <head>
         <title>アトラクション予約システム</title>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen overflow-hidden`}
       >
-        <Header/>
-        <main>{children}</main>
-        <Footer/>        
+        <Header />
+        <main className="flex-1 pb-16 pt-16">{children}</main>
+        <Footer />
       </body>
     </html>
   );
 }
-
-
