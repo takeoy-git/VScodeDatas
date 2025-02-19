@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Theater Reserve",
+  title: "S Theater Reserve",
   description: "reserve system of the theater",
 };
 
@@ -29,9 +29,8 @@ export default function RootLayout({
       <head>
         <title>アトラクション予約システム</title>
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen overflow-hidden`}
-      >
+      {/* 🚀 `/maintenance` ページのときは `bg-black` にする */}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen overflow-hidden`}>
         <Header />
         <main className="flex-1 pb-16 pt-16">{children}</main>
         <Footer />

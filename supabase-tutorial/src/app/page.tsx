@@ -46,7 +46,7 @@ export default function HomePage() {
       <div className="bg-gray-900 bg-opacity-80 p-8 rounded-xl shadow-lg text-center w-80">
         {!user ? (
           <>
-            <h1 className="text-2xl font-bold mb-4">ログインしてください</h1>
+            <h1 className="text-2xl text-white font-bold mb-4">ログインしてください</h1>
             {error && <p className="text-red-500 mb-2">{error}</p>}
             <form onSubmit={handleLogin} className="flex flex-col space-y-4">
               <input

@@ -1,28 +1,30 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Header() {
   const router = useRouter();
+  const pathname = usePathname(); // ✅ usePathname() を使用して、Next.js のルーターから確実に取得
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [currentPath, setCurrentPath] = useState("");
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCurrentPath(window.location.pathname);
-    }
-  }, []);
+    console.log("Current Path Updated:", pathname);
+  }, [pathname]);
 
   const handleNavigation = (destination: string) => {
-    if (currentPath === "/reserve" && destination === "/") {
-      setPassword(""); // 毎回初期化
+    console.log("Navigating from:", pathname, "to:", destination);
+
+    if ((pathname === "/reserve" || pathname === "/maintenance") && destination === "/") {
+      setPassword(""); // 初期化
       setError(""); // エラーメッセージをリセット
       setIsPasswordModalOpen(true);
+      console.log("Password modal should open");
     } else {
       router.push(destination);
+      console.log("Navigating without password");
     }
   };
 
